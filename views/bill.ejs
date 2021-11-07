@@ -85,7 +85,7 @@
       <li class="nav-item">
         <a href="/sizes" class="nav-link text-dark font-italic">
           <i class="check square icon"></i>
-                  Size
+          Quantity
               </a>
       </li>
     </ul>
@@ -132,8 +132,9 @@
           <th>Item Name</th>
           <th>Category</th>
           <th>Brand</th>
-          <th>Size</th>
+          <th>Quantity</th>
           <th>Amount</th>
+          <th>Expiration Date</th>
           <th>Phone Number</th>
         </tr>
       </thead>
@@ -172,8 +173,7 @@
               <select class="form-select" aria-label="Default select example" name="brand1" id="brand1" required >
                 <% brand.forEach(function(order){ %>
                 <option value="<%= order.Brand %>"><%= order.Brand %></option>
-                <% }); %>
-           
+                <% }); %>           
               </select>
                 <label for="floatingInput">Brand</label>
             </div>
@@ -184,15 +184,21 @@
                 <% size.forEach(function(order){ %>
                   <option value="<%= order.Size %>"><%= order.Size %></option>
                 <% }); %>
-           
               </select>
-              <label for="floatingInput">Size</label>
+              <label for="floatingInput">Quantity</label>
             </div>
           </td>
           <td class="table-success"> 
-            <div class="form-floating">
-              <input type="number" class="form-control" id="amount1" name="amount1" value=0 min="0" max="99999" required>
+          <div class="form-floating">
+              <input type="number" class="form-control" id="amount1" name="amount1" value=0 min="0" max="999999" required>
               <label for="floatingInput">Amount <i class="rupee sign icon"></i></label>
+              
+          </div>
+          </td>
+          <td class="table-primary">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="ExpirationDate1" name="ExpirationDate1"  required >
+              <label for="floatingInput">Expiration Date</label>
               
           </div>
           </td>
@@ -226,7 +232,7 @@
                 <div class="form-floating">
                   <input type="number" class="form-control" id="total" name="total" value=0  required disabled>
                   <label for="floatingInput">Total Amount</label>
-                
+    
               </div>
               </div>
             </div>
@@ -367,9 +373,10 @@
                 var inputs = document.getElementsByTagName("input");
                 itemname_id = "itemname" + button_num
                 amount_id = "amount" + button_num
+                ExpirationDate_id = "ExpirationDate" + button_num
                 category_id = "category" + button_num
                 brand_id = "brand" + button_num
-                size_id = "size" + button_num
+                size_id = "Quantity" + button_num
                
                 for (var i = 0; i < inputs.length; i++) {
                   if(inputs[i].id == itemname_id){
@@ -381,6 +388,10 @@
                   inputs[i].value = x[0].Amount
                   // console.log(x.Amount)
                   }
+                  if(inputs[i].id == ExpirationDate_id){
+                  inputs[i].value = x[0].ExpirationDate
+                  // console.log(x.expirationDate)
+                  }
                 }
                 var total_amount = 0
                 for (var i = 0; i < inputs.length; i++) {
@@ -389,6 +400,7 @@
                     total_amount = total_amount + parseInt(inputs[i].value)
                   // console.log(x.Amount)
                   }
+
                 }
                 // console.log(total_amount)
                 for (var i = 0; i < inputs.length; i++) {
@@ -414,6 +426,7 @@
                   selects[i].value = x[0].Size
                   
                   }
+
                 }
 
             } else if(data.status == "failed") {
@@ -455,6 +468,7 @@
   for(var i=0; i<item_names.length; i++){
     if((item_names[i].id).includes('itemname')){
       var item_num = (item_names[i].id).charAt((item_names[i].id).length-1)
+      
       for(var j=0;j<item_names.length;j++){
         if((item_names[j].id).includes('amount')){
         var amount_num = (item_names[j].id).charAt((item_names[j].id).length-1)

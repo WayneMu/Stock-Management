@@ -85,7 +85,7 @@
       <li class="nav-item">
         <a href="/sizes" class="nav-link text-dark font-italic">
           <i class="check square icon"></i>
-                  Size
+          Quantity
               </a>
       </li>
     </ul>
@@ -178,8 +178,9 @@
             <th>Item Name</th>
             <th>Category</th>
             <th>Brand Name</th>
-            <th>Size</th>
+            <th>Quantity</th>
             <th>Amount</th>
+            <th>Expiration Date</th>
             <th>Date Entered</th>
             <th>Time Entered</th>
         </tr>
@@ -193,6 +194,7 @@
                 <td><%= order.Brand %></td>
                 <td><%= order.Size %></td>
                 <td><%= order.Amount %></td>
+                <td><%= order.ExpirationDate %></td>
                 <td><%= order.StockDate %></td>
                 <td><%= order.StockTime %>&emsp;<form action="/deletestock" method="POST"><input type="hidden" name="deleteid" value="<%= order.ItemID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                 <!-- <form action="/deleteitem" method="POST"><input type="hidden" name="deleteid" value="<%= order.TransactionID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form> -->
@@ -215,6 +217,7 @@
               <th>Brand Name</th>
               <th>Size</th>
               <th>Amount</th>
+              <th>Expiration Date</th>
               <th>Date Entered</th>
               <th>Time Entered</th>
           </tr>
@@ -228,6 +231,7 @@
                   <td><%= order.Brand %></td>
                   <td><%= order.Size %></td>
                   <td><%= order.Amount %></td>
+                  <td><%= order.ExpirationDate %></td>
                   <td><%= order.StockDate %></td>
                   <td><%= order.StockTime %>&emsp;<form action="/deletestock" method="POST"><input type="hidden" name="deleteid" value="<%= order.ItemID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                   <!-- <form action="/deleteitem" method="POST"><input type="hidden" name="deleteid" value="<%= order.TransactionID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form> -->
@@ -250,6 +254,7 @@
                 <th>Brand Name</th>
                 <th>Size</th>
                 <th>Amount</th>
+                <th>Expiration Date</th>
                 <th>Date Entered</th>
                 <th>Time Entered</th>
             </tr>
@@ -263,6 +268,7 @@
                     <td><%= order.Brand %></td>
                     <td><%= order.Size %></td>
                     <td><%= order.Amount %></td>
+                    <td><%= order.ExpirationDate %></td>
                     <td><%= order.StockDate %></td>
                     <td><%= order.StockTime %>&emsp;<form action="/deletestock" method="POST"><input type="hidden" name="deleteid" value="<%= order.ItemID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                     

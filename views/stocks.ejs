@@ -92,7 +92,7 @@
       <li class="nav-item">
         <a href="/sizes" class="nav-link text-dark font-italic">
           <i class="check square icon"></i>
-                  Size
+                  Quantity
               </a>
       </li>
     </ul>
@@ -142,8 +142,9 @@
           <th>Item Name</th>
           <th>Category</th>
           <th>Brand</th>
-          <th>Size</th>
+          <th>Quantity</th>
           <th>Amount</th>
+          <th>Expiration Date</th>
         </tr>
       </thead>
       
@@ -219,16 +220,24 @@
                 <option value="XL">XL</option>
                 <option value="XXL">XXL</option> -->
               </select>
-              <label for="floatingInput">Size</label>
+              <label for="floatingInput">Quantity</label>
             </div>
           </td>
+
           <td class="table-success">
             <div class="form-floating">
               <input type="number" class="form-control" name="amount1" placeholder="Enter Amount" value=0 id="amount1" required>
-              <label for="floatingInput">Amount</label>
+              <label for="floatingInput">Amount</label> 
+          </div>
+          </td>
+          <td class="table-primary">
+            <div class="form-floating">
+              <input type="date"class="form-control" value="ExpirationDate1" id="c" name="ExpirationDate1" required>
+              <label for="floatingInput">Expiration Date</label>
               
           </div>
           </td>
+          
         </tr>
      
         </tbody>

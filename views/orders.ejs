@@ -85,7 +85,7 @@
       <li class="nav-item">
         <a href="/sizes" class="nav-link text-dark font-italic">
           <i class="check square icon"></i>
-                  Size
+          Quantity
               </a>
       </li>
     </ul>
@@ -199,6 +199,7 @@
             <div class="col-lg">
               <p class="text-danger"> Total Amount: <i><i class="rupee sign icon"></i><%= order.Amount %></i></p>
             </div>
+            
           </div>
           <div class="row-lg">
             <div class="col-lg">
@@ -212,7 +213,7 @@
       
       </div>
       <div class="content">
-        <table class="ui inverted violet table table-bordered" >
+      <table class="ui inverted violet table table-bordered" >
           <thead>
             <tr class="table-success">
                 
@@ -220,8 +221,9 @@
                 <th>Item Name</th>
                 <th>Category</th>
                 <th>Brand Name</th>
-                <th>Size</th>
+                <th>Quantity</th>
                 <th>Amount</th>
+                <th>Expiration Date</th>
                 <th>Customer Number</th>
             </tr>
         </thead>
@@ -238,6 +240,7 @@
             <td><%= sub_order.Brand %></td>
             <td><%= sub_order.Size %></td>
             <td><i class="rupee sign icon"></i><%= sub_order.Amount %></td>
+            <td><%= sub_order.ExpirationDate %></td>
             <td><%= sub_order.CustomerNumber %></td>
             </tr>
           <% } %>
@@ -270,6 +273,9 @@
         </div>
         <div class="row-lg">
           <div class="col-lg">
+            <p class="text-success">Expiration: <i><%= order.ExpirationDate %></i></p>
+          </div>
+          <div class="col-lg">
             <p class="text-success">Date: <i><%= order.TransactionDate %></i></p>
           </div>
           <div class="col-lg">
@@ -287,8 +293,9 @@
               <th>Item Name</th>
               <th>Category</th>
               <th>Brand Name</th>
-              <th>Size</th>
+              <th>Quantity</th>
               <th>Amount</th>
+              <th>Expiration Date</th>
               <th>Customer Number</th>
           </tr>
       </thead>
@@ -305,6 +312,7 @@
           <td><%= sub_order.Brand %></td>
           <td><%= sub_order.Size %></td>
           <td><i class="rupee sign icon"></i><%= sub_order.Amount %></td>
+          <td><%= sub_order.ExpirationDate %></td>
           <td><%= sub_order.CustomerNumber %></td>
           </tr>
         <% } %>
@@ -337,6 +345,9 @@
       </div>
       <div class="row-lg">
         <div class="col-lg">
+          <p class="text-success">Expiration: <i><%= order.ExpirationDate %></i></p>
+        </div>
+        <div class="col-lg">
           <p class="text-success">Date: <i><%= order.TransactionDate %></i></p>
         </div>
         <div class="col-lg">
@@ -354,8 +365,9 @@
             <th>Item Name</th>
             <th>Category</th>
             <th>Brand Name</th>
-            <th>Size</th>
+            <th>Quantity</th>
             <th>Amount</th>
+            <th>Expiration Date</th>
             <th>Customer Number</th>
         </tr>
     </thead>
@@ -372,6 +384,7 @@
         <td><%= sub_order.Brand %></td>
         <td><%= sub_order.Size %></td>
         <td><i class="rupee sign icon"></i><%= sub_order.Amount %></td>
+        <td><%= sub_order.ExpirationDate %></td>
         <td><%= sub_order.CustomerNumber %></td>
         </tr>
       <% } %>
@@ -395,13 +408,14 @@
                 <td><%= order.Brand %></td>
                 <td><%= order.Size %></td>
                 <td><%= order.Amount %></td>
+                <td><%= order.ExpirationDate %></td>
                 <td><%= order.TransactionDate %></td>
                 <td><%= order.TransactionTime %>&emsp;<form action="/deleteitem" method="POST"><input type="hidden" name="deleteid" value="<%= order.ItemID %>"><button type="submit" class="btn btn-danger btn-sm">Delete</button></form></td>
                 <td><%= order.CustomerNumber %></td>
             </tr>
         <% }); %>
     </tbody>
-    </table> -->
+    </table>
     </div>
     
 

@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-    <title>Sizes</title>
+    <title>Quantity</title>
   </head>
   <body>
     <!--Vertical Navbar-->
@@ -85,7 +85,7 @@
       <li class="nav-item">
         <a href="/sizes" class="nav-link text-dark font-italic" style="background: linear-gradient(to right, #0066eb 0%, #ff8ab3 68%);">
           <p class="text-white"><i class="check square icon"></i>
-                  Size
+            Quantity
             </p>
               </a>
       </li>
@@ -119,25 +119,25 @@
   
     <!-- Page content -->
     
-    <h1>Manage Sizes</h1>
+    <h1>Manage Quantity</h1>
     <center><img class="ui large rounded image" src="size.svg"></center>
     <br>
     <center>
          <!-- Button trigger modal -->
 <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Add New Size <i class="plus circle icon"></i></span>
+    Add New Quantity <i class="plus circle icon"></i></span>
   </button>
     <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add New Size</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add New Quantity</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">Enter New Size</label>
+                <label for="formGroupExampleInput" class="form-label">Enter New Quantity</label>
                 <form action="/addsize" method="POST">
                 <input type="text" class="form-control" id="formGroupExampleInput" name="new" style="color:white;background: linear-gradient(to right, #0066eb 0%, #ff8ab3 68%);">
               </div>
@@ -154,7 +154,7 @@
     <table class="ui inverted violet table table-bordered" >
         <thead>
         <tr>
-            <th><center><h1>Sizes</h1></center></th>
+            <th><center><h1>Quantity</h1></center></th>
         </tr>
     </thead>
     <tbody>
