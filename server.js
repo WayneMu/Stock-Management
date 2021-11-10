@@ -4,7 +4,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express')
 const app = express()
-const dotenv = require('dotenv').config()
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
@@ -12,7 +11,7 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const mysql = require('mysql');
 const bodyparser = require('body-parser');
-
+require('dotenv');
 
 var port = process.env.PORT || 5000;
 app.use(bodyparser.json());
