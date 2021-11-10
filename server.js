@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express')
 const app = express()
+const dotenv = require('dotenv')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
