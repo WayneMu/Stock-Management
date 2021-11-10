@@ -12,7 +12,7 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const mysql = require('mysql');
 const bodyparser = require('body-parser');
-const dotenv = require('dotenv');
+
 
 var port = process.env.PORT || 5000;
 app.use(bodyparser.json());
