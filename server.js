@@ -16,11 +16,13 @@ require('dotenv').config();
 var port = process.env.PORT || 5000;
 app.use(bodyparser.json());
 
+//mysql://b1572b7b937f32:48121d10@us-cdbr-east-04.cleardb.com/heroku_b046151df659bea?reconnect=true 
+
 var mysqlConnection = mysql.createConnection({
-  host:'localhost',
-  user: process.env.db_user_name,
-  password: process.env.db_password,
-  database: process.env.db_name
+  host:'us-cdbr-east-04.cleardb.com',
+  user: 'b1572b7b937f32',
+  password: '48121d10',
+  database: heroku_b046151df659bea
 });
 
 mysqlConnection.connect((err)=>{
