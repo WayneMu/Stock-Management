@@ -56,8 +56,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
   secret: 'secret',
-  resave: false,
-  saveUninitialized: false
+  //resave: false,
+ // saveUninitialized: false
 }))
 app.use(passport.initialize())
 app.use(passport.session())
