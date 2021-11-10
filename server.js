@@ -16,13 +16,20 @@ require('dotenv').config();
 var port = process.env.PORT || 5000;
 app.use(bodyparser.json());
 
-//mysql://b1572b7b937f32:48121d10@us-cdbr-east-04.cleardb.com/heroku_b046151df659bea?reconnect=true 
+//mysql://b22c4a6390b5ef:3bb836a7@us-cdbr-east-04.cleardb.com/heroku_968272507af8ef7?reconnect=true
 
+
+/*var mysqlConnection = mysql.createConnection({
+  host:'localhost',
+  user: process.env.db_user_name,
+  password: process.env.db_password,
+  database: process.env.db_name
+});*/
 var mysqlConnection = mysql.createConnection({
   host:'us-cdbr-east-04.cleardb.com',
   user: 'b1572b7b937f32',
   password: '48121d10',
-  database: heroku_b046151df659bea
+  database: ' heroku_968272507af8ef7 '
 });
 
 mysqlConnection.connect((err)=>{
@@ -57,9 +64,9 @@ app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
-  secret: 'secret',
-  //resave: false,
- // saveUninitialized: false
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
 }))
 app.use(passport.initialize())
 app.use(passport.session())
