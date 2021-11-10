@@ -27,8 +27,8 @@ app.use(bodyparser.json());
 });*/
 var mysqlConnection = mysql.createConnection({
   host:'us-cdbr-east-04.cleardb.com',
-  user: 'b1572b7b937f32',
-  password: '48121d10',
+  user: 'b22c4a6390b5ef',
+  password: '3bb836a7',
   database: ' heroku_968272507af8ef7 '
 });
 
