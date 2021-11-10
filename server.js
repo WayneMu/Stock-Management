@@ -12,8 +12,7 @@ const methodOverride = require('method-override')
 const mysql = require('mysql');
 const bodyparser = require('body-parser');
 
-
-require('dotenv').load();
+require('dotenv').config();
 var port = process.env.PORT || 5000;
 app.use(bodyparser.json());
 
