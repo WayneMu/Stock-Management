@@ -9,11 +9,13 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
+const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 const bodyparser = require('body-parser');
 
 require('dotenv').config();
 var port = process.env.PORT || 5000;
+app.use(express.json()); 
 app.use(bodyparser.json());
 
 //mysql://b22c4a6390b5ef:3bb836a7@us-cdbr-east-04.cleardb.com/heroku_968272507af8ef7?reconnect=true
@@ -58,9 +60,17 @@ initializePassport(
   id => users.find(user => user.id === id)
 )
 
-
+//ejs extention
 app.use( express.static( "public" ) )
 app.set('view-engine', 'ejs')
+//hbs extention
+// Templating Engine
+
+//app.engine('hbs', exphbs( {extname: '.hbs' })); //for log in
+app.engine('hbs', require( 'exphbs' ));
+app.set('view engine', 'hbs');
+
+ app.use(bodyparser.urlencoded({ extended: true  })) 
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
@@ -195,7 +205,8 @@ function checkNotAuthenticated(req, res, next) {
   }
   next()
 }
-
+const routes = require('./server/routes/user');
+app.use('/', routes);
 app.listen(port, ()=>console.log(`Express Server is running at ${port} port`))
 app.get('/employees', (req,res) =>{
   mysqlConnection.query('SELECT * FROM warehouse', (err, rows, fields)=>{
