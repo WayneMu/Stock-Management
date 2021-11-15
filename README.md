@@ -1,6 +1,6 @@
 
 
-# DSO34BT DOCCUMENTATION
+# DSO34BT DOCUMENTATION
 Stock Tracking System Group A
 
 # Install MySQL
