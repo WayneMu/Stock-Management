@@ -43,3 +43,8 @@ npm run start
 # Type this is your browser to open the local version of the website
 
 http://localhost:5000/
+
+# always use *git pull* to get code that was updated by other team members
+# use *git push* to push your current code on our main banch
+*always create your own branch for pages that your still working on*
+
