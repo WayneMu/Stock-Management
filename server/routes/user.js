@@ -4,7 +4,7 @@ const userController = require('../controllers/userController');
 
 // Routes
 router.get('/user', userController.view);
-router.post('/', userController.find);
+router.post('/user', userController.find);
 router.get('/adduser', userController.form);
 router.post('/adduser', userController.create);
 router.get('/edituser/:id', userController.edit);

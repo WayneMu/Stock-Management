@@ -71,7 +71,7 @@ app.engine('hbs', require( 'exphbs' ));
 app.set('view engine', 'hbs');
 
  app.use(bodyparser.urlencoded({ extended: true  })) 
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -214,7 +214,7 @@ app.get('/employees', (req,res) =>{
     res.send(rows);
     else
     console.log(err);
-  })
+  })        
 })
 
 //View Orders
