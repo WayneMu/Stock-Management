@@ -94,4 +94,7 @@
       width: 95%;
     }
 
-    
+    .fa-zar:before{
+      font-weight: bold;
+      content : "R";
+    }
