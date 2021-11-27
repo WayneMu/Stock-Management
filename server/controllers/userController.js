@@ -1,8 +1,32 @@
 const mysql = require('mysql');
 
 // Connection Pool
-var mysqlConnection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+/*let connection = mysql.createConnection({
+  host:'localhost',
+  user: process.env.db_user_name,
+  password: process.env.db_password,
+  database: process.env.db_name
+});*/
 
+/*let connection = mysql.createConnection({
+  host:'localhost',
+  user: process.env.db_user_name,
+  password: process.env.db_password,
+  database: process.env.db_name
+});*/
+
+if(process.env.CLEARDB_DATABASE_URL){
+  var connection= mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+  }else{
+  
+    var connection = mysql.createConnection({
+  //process.env.CLEARDB_DATABASE_URL
+  host:'localhost',
+  user: process.env.db_user_names,
+  password: process.env.db_passwords,
+  database: process.env.db_names
+  });
+  }
 // View Users
 exports.view = (req, res) => {
   // User the connection
