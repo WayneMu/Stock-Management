@@ -21,12 +21,7 @@ app.use(bodyparser.json());
 //mysql://b22c4a6390b5ef:3bb836a7@us-cdbr-east-04.cleardb.com/heroku_968272507af8ef7?reconnect=true
 
 
-var mysqlConnection = mysql.createConnection({
-  host:'us-cdbr-east-04.cleardb.com',
-  user: process.env.db_user_name,
-  password: process.env.db_password,
-  database: process.env.db_name
-});
+var mysqlConnection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
 /*var mysqlConnection = mysql.createConnection({
   host:'us-cdbr-east-04.cleardb.com',
   user: 'b22c4a6390b5ef',

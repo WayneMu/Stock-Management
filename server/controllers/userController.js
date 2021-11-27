@@ -1,12 +1,7 @@
 const mysql = require('mysql');
 
 // Connection Pool
-let connection = mysql.createConnection({
-  host:'localhost',
-  user: process.env.db_user_name,
-  password: process.env.db_password,
-  database: process.env.db_name
-});
+var mysqlConnection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
 
 // View Users
 exports.view = (req, res) => {
