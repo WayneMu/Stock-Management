@@ -1,4 +1,6 @@
-
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({silent: true})
+}
 
 const express = require('express')
 const app = express()
@@ -10,8 +12,8 @@ const methodOverride = require('method-override')
 const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 const bodyparser = require('body-parser');
+require('dotenv').config({silent: true});
 
-require('dotenv').config();
 var port = process.env.PORT || 5000;
 app.use(express.json()); 
 app.use(bodyparser.json());
@@ -20,7 +22,7 @@ app.use(bodyparser.json());
 
 
 var mysqlConnection = mysql.createConnection({
-  host:'localhost',
+  host:'us-cdbr-east-04.cleardb.com',
   user: process.env.db_user_name,
   password: process.env.db_password,
   database: process.env.db_name
