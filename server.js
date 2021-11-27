@@ -37,7 +37,7 @@ app.use(bodyparser.json());
 });*/
 
 if(process.env.CLEARDB_DATABASE_URL){
-var mysqlConnection = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
+var mysqlConnection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
 }else
 {
   var mysqlConnection = mysql.createConnection({
