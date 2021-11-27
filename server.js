@@ -37,7 +37,7 @@ app.use(bodyparser.json());
 });*/
 
 if(process.env.CLEARDB_DATABASE_URL){
-var mysqlConnection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+var mysqlConnection = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 }else
 {
   var mysqlConnection = mysql.createConnection({
@@ -220,8 +220,8 @@ function checkNotAuthenticated(req, res, next) {
   }
   next()
 }
-const routes = require('./server/routes/user');
-app.use('/', routes);
+//const routes = require('./server/routes/user');
+//app.use('/', routes);
 app.listen(port, ()=>console.log(`Express Server is running at ${port} port`))
 app.get('/employees', (req,res) =>{
   mysqlConnection.query('SELECT * FROM warehouse', (err, rows, fields)=>{
