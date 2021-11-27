@@ -16,7 +16,7 @@ const mysql = require('mysql');
 });*/
 
 if(process.env.CLEARDB_DATABASE_URL){
-  var connection= mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+  var connection= mysql.createPool(process.env.CLEARDB_DATABASE_URL);
   }else{
   
     var connection = mysql.createConnection({
