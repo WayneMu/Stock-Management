@@ -9,6 +9,12 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
+var io = require("socket.io")(3000,{
+cors:{
+  origin: ["http://localhost:5000"]
+ }
+})
+var http = require("http").createServer(app);
 const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 const bodyparser = require('body-parser');
@@ -17,24 +23,6 @@ require('dotenv').config({silent: true});
 var port = process.env.PORT || 5000;
 app.use(express.json()); 
 app.use(bodyparser.json());
-
-//mysql://b22c4a6390b5ef:3bb836a7@us-cdbr-east-04.cleardb.com/heroku_968272507af8ef7?reconnect=true
-
-
-/*var mysqlConnection = mysql.createConnection({
-  host:'us-cdbr-east-04.cleardb.com',
-  user: process.env.db_user_name,
-  password: process.env.db_password,
-  database: process.env.db_name
-});*/
-
-/*var mysqlConnection = mysql.createConnection({
-           //process.env.CLEARDB_DATABASE_URL
-  host:'localhost',
-  user: process.env.db_user_name,
-  password: process.env.db_password,
-  database: process.env.db_name
-});*/
 
 if(process.env.CLEARDB_DATABASE_URL){
 var mysqlConnection = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
@@ -222,7 +210,17 @@ function checkNotAuthenticated(req, res, next) {
 }
 //const routes = require('./server/routes/user');
 //app.use('/', routes);
-app.listen(port, ()=>console.log(`Express Server is running at ${port} port`))
+app.listen(port, ()=>{
+console.log(`Express Server is running at ${port} port`);
+io.on('connection', function (socket) {
+  console.log("User " + socket.id);
+
+  socket.on("messageSent", function (message) {
+      socket.broadcast.emit("messageSent", message);
+  });
+});
+});
+
 app.get('/employees', (req,res) =>{
   mysqlConnection.query('SELECT * FROM warehouse', (err, rows, fields)=>{
     if(!err)

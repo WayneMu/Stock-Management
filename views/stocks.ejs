@@ -250,7 +250,7 @@
         
      
         </table>
-        <center><button type="submit" class="ui teal submit button">Submit</button></center>
+        <center><button type="submit" onclick="sendMessage()" value="Send Message" class="ui teal submit button success">Submit</button></center>
       </form>
        
      
@@ -270,7 +270,33 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-
+    	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script>
+      const socket = io.connect("http://192.168.142.234:5000");
+     // const socket = io("http://localhost:5000", {reconnect:true});
+      function sendMessage() {
+    socket.emit("messageSent", {
+        "itemname1": document.getElementById("itemname1").value,
+        "amount1": document.getElementById("amount1").value,
+        "size1": document.getElementById("size1").value
+        //"message": document.getElementById("message").value
+    });
+ 
+    // Call an AJAX for further actions you want to perform (like saving in database etc.)
+}
+    </script>
+    <!--<script>
+            const socket = io.connect("http://192.168.142.234:5000");
+            //const socket = io("http://localhost:5000", {reconnect:true});
+   
+      socket.on("messageSent", function (message) {
+          $.notify("New Message\n" + message.itemname1 + "\n\nFrom: " + message.size1, {
+              autoHide: false,
+              className: "success"
+          });
+      });
+  </script>-->
 
     <script>
       $(document).ready(function($)
