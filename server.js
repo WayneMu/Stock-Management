@@ -13,7 +13,7 @@ var io = require("socket.io")(3000,{
 cors:{
   origin: ["http://localhost:5000"]
  }
-})
+});
 var http = require("http").createServer(app);
 const exphbs = require('express-handlebars');
 const mysql = require('mysql');
