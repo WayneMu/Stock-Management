@@ -1,4 +1,7 @@
 const mysql = require('mysql');
+const passport = require('passport');
+const bodyparser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 // Connection Pool
 /*let connection = mysql.createConnection({
@@ -14,6 +17,9 @@ const mysql = require('mysql');
   password: process.env.db_password,
   database: process.env.db_name
 });*/
+const users = []
+
+
 
 if(process.env.CLEARDB_DATABASE_URL){
   var connection= mysql.createPool(process.env.CLEARDB_DATABASE_URL);
@@ -27,6 +33,23 @@ if(process.env.CLEARDB_DATABASE_URL){
   database: process.env.db_names
   });
   }
+
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+  //res.redirect('/login')
+
+
+
+
+const initializePassport = require('../../passport-config')
+const e = require('express')
+initializePassport(
+
+passport,
+email => users.find(user => user.email === email),
+id => users.find(user => user.id === id)
+)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // View Users
 exports.view = (req, res) => {
   // User the connection
@@ -64,7 +87,20 @@ exports.form = (req, res) => {
 exports.create = (req, res) => {
   const { first_name, last_name, email, phone, comments } = req.body;
   let searchTerm = req.body.search;
-
+///////////////////////////////////////////////////////////////////////////////////
+try {
+ 
+  users.push({
+   
+    email: req.body.email,
+    password: req.body.email
+  })
+  console.log("user a")
+  
+} catch {
+  console.log("user not a")
+}
+//////////////////////////////////////////////////////////////////////////////////
   // User the connection
   connection.query('INSERT INTO users SET first_name = ?, last_name = ?, email = ?, phone = ?, comments = ?', [first_name, last_name, email, phone, comments], (err, rows) => {
     if (!err) {

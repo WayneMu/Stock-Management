@@ -9,12 +9,14 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-var io = require("socket.io")(3000,{
+const http = require("http").createServer(app);
+const io = require("socket.io")(http,{
 cors:{
-  origin: ["http://localhost:5000"]
+  origin: "*"
+  
  }
 });
-var http = require("http").createServer(app);
+
 const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 const bodyparser = require('body-parser');
@@ -210,8 +212,7 @@ function checkNotAuthenticated(req, res, next) {
 }
 //const routes = require('./server/routes/user');
 //app.use('/', routes);
-app.listen(port, ()=>{
-console.log(`Express Server is running at ${port} port`);
+http.listen(port, ()=>console.log(`Express Server is running at ${port} port`));
 io.on('connection', function (socket) {
   console.log("User " + socket.id);
 
@@ -219,8 +220,6 @@ io.on('connection', function (socket) {
       socket.broadcast.emit("messageSent", message);
   });
 });
-});
-
 app.get('/employees', (req,res) =>{
   mysqlConnection.query('SELECT * FROM warehouse', (err, rows, fields)=>{
     if(!err)
