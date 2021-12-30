@@ -6,15 +6,20 @@ const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+const cors = require('cors')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
 const http = require("http").createServer(app);
 const io = require("socket.io")(http,{
 cors:{
-  origin: "*"
   
- }
+  origin: "*",
+  methods: ["GET", "POST"],
+  transports: ['websocket', 'polling'],
+  credentials: true
+},
+allowEIO3: true
 });
 
 const exphbs = require('express-handlebars');
@@ -992,4 +997,93 @@ app.post('/deletestock', checkAuthenticated,(req,res) => {
     else
     console.log(err);
   });
+})
+
+//edit Stocks
+app.get('/edit-stocks', checkAuthenticated,(req, res) => {
+  let sql1 = 'SELECT * FROM categorydb'
+  
+  let query1 = mysqlConnection.query(sql1, (err1, rows1, fields1)=>{
+    if(!err1)
+    {
+      var category = rows1
+      let sql2 = 'SELECT * FROM branddb'
+      let query2 = mysqlConnection.query(sql2, (err2, rows2, fields2)=>{
+        if(!err2)
+        {
+          var brand = rows2
+          let sql3 = 'SELECT * FROM sizedb'
+          let query3 = mysqlConnection.query(sql3, (err3, rows3, fields3)=>{
+            if(!err3)
+            {
+              var size = rows3
+              console.log(typeof(category))
+              console.log(category)
+              console.log(brand)
+              console.log(size)
+              res.render('edit-stocks.ejs',{category:category, brand:brand, size:size})
+            }
+            else
+            console.log(err3)
+          })
+        }
+        else
+        console.log(err2)
+      })
+    }
+    else
+    console.log(err1)
+
+  
+})
+  // res.render('stocks.ejs')
+})
+
+
+//Edit Stock
+app.post('/edit-stock', checkAuthenticated,(req,res) => {
+  console.log('edit item called')
+  const { ItemID, ItemName,Category, Brand, Size, Amount, ExpirationDate } = req.body;
+  var editid = req.body.editid
+  let sql = 'UPDATE stockdb SET ItemID = ?, ItemName = ?, Category = ?, Brand = ?, Size = ? ,Amount = ? ,ExpirationDate = ?,WHERE ItemID = ?'
+  //let query = mysqlConnection.query( [first_name, last_name, email, phone, comments, req.params.id], (err, rows) => {
+  let query = mysqlConnection.query(sql,[ItemID, ItemName,Category, Brand, Size, Amount, ExpirationDate, editid /*req.params.id*/], (err, rows, fields)=>{
+    mysqlConnection.query('SELECT * FROM stockdb WHERE ItemID  = ?', [req.params.ItemID], (err, rows) => {
+   
+    if(!err)
+    {
+    console.log('Successfully updated a value')
+    res.redirect('/viewstocks')
+    
+    }
+    
+    else
+    console.log(err);
+  });
+  });
+  //////////////////////////////////////
+
+  // User the connection
+  /*mysqlConnection.query('UPDATE stockdb SET ItemID = ?, ItemName = ?, ItemName = ?, phone = ?, comments = ? WHERE id = ?', [first_name, last_name, email, phone, comments, req.params.id], (err, rows) => {
+    //category1 brand1 size1 amount1 ExpirationDate1
+    if (!err) {
+      // User the connection
+      mysqlConnection.query('SELECT * FROM users WHERE id = ?', [req.params.id], (err, rows) => {
+        // When done with the connection, release it
+        
+        if (!err) {
+          res.render('edit-user', { rows, alert: `${first_name} has been updated.` });
+        } else {
+          console.log(err);
+        }
+        console.log('The data from users table: \n', rows);
+      });
+    } else {
+      console.log(err);
+    }
+    console.log('The data from users table: \n', rows);
+  });*/
+  //////////////////////////////////////
+  //category1, brand1, size1, amount1, ExpirationDate1
+
 })
