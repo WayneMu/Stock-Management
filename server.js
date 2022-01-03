@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express')
 const app = express()
+const router = express.Router()
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const cors = require('cors')
@@ -51,24 +52,8 @@ database: process.env.db_name
   console.log('DB connection failed \n Error :' + JSON.stringify(err,undefined,2));
 })*/
 
-const users = []
-
-  users.push({
-    id: Date.now().toString(),
-    name: 'Admin',
-    email: process.env.login_id,
-    password: process.env.login_password
-  })
 
 
-const initializePassport = require('./passport-config')
-const e = require('express')
-initializePassport(
-  
-  passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-)
 
 //ejs extention
 app.use( express.static( "public" ) )
@@ -167,6 +152,15 @@ app.get('/', checkAuthenticated, (req, res) => {
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
+  
+const users = []
+
+users.push({
+  id: Date.now().toString(),
+  name: 'Admin',
+  email:  req.body.email,
+  password:  req.body.email
+})
   res.render('login.ejs')
 })
 
@@ -215,8 +209,8 @@ function checkNotAuthenticated(req, res, next) {
   }
   next()
 }
-//const routes = require('./server/routes/user');
-//app.use('/', routes);
+const routes = require('./server/routes/user');
+app.use('/', routes);
 http.listen(port, ()=>console.log(`Express Server is running at ${port} port`));
 io.on('connection', function (socket) {
   console.log("User " + socket.id);

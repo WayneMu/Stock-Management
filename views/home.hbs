@@ -20,7 +20,7 @@
       <div class="media d-flex align-items-center"><img src="admin.svg" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
         &emsp;<div class="media-body">
           <h4 class="m-0"><p class="text-white"><shop-name></h4>
-          <p class="font-weight-light text-white mb-0">(Admin)</p>
+          <p class="font-weight-light text-white mb-0">({{this.id}}</p>
         </div>
       </div>
     </div>
@@ -155,8 +155,8 @@
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">Email</th>
-      <th scope="col">phone</th>
-      <th scope="col" class="text-end">Action</th>
+      <th scope="col">Password</th>
+      <th scope="col" class="text-end">Role</th>
     </tr>
   </thead>
   <tbody>
@@ -167,12 +167,13 @@
       <td>{{this.first_name}}</td>
       <td>{{this.last_name}}</td>
       <td>{{this.email}}</td>
-      <td>{{this.phone}}</td>
+      <td>{{this.password}}</td>
+      <td>{{this.role}}</td>
       <td class="text-end">
         <a href="/viewuser/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-eye"></i> View</a>
         <a href="/edituser/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>
           Edit</a>
-        <a href="/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-person-x"></i> Delete</a>
+        <a href="/user/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-person-x"></i> Delete</a>
       </td>
     </tr>
     {{/each}}
