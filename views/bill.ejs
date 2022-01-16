@@ -263,17 +263,17 @@
       {
         $(document).on('click',".btn_row_add_below_end", function(e)
         {
-          var tableBody = $(document).find('.tbl_code_with_mark').find("tbody");
-          var trLast = tableBody.find("tr:last");
-          var trNew = trLast.clone();
-          var x = document.getElementById('myTable');
-          var len = x.rows.length;
+          let tableBody = $(document).find('.tbl_code_with_mark').find("tbody");
+          let trLast = tableBody.find("tr:last");
+          let trNew = trLast.clone();
+          let x = document.getElementById('myTable');
+          let len = x.rows.length;
           trLast.after(trNew);
          
         
-          var inputs = document.getElementsByTagName("input");
-          var flag1=flag2=1;
-          for (var i = 0; i < inputs.length; i++) {
+          let inputs = document.getElementsByTagName("input");
+          let flag1=flag2=1;
+          for (let i = 0; i < inputs.length; i++) {
 
             if(inputs[i].id != 'total'){
           
@@ -289,8 +289,8 @@
             
           }
           }
-          var count = 0
-          for (var i = 0; i < inputs.length; i++) {
+          let count = 0
+          for (let i = 0; i < inputs.length; i++) {
             if((inputs[i].id).includes("number")){
               // console.log(`Item Name = ${inputs[i]}`)
               // console.log(`Before value = ${inputs[i].value}`)
@@ -300,7 +300,7 @@
             }
           }
 
-          for (var i = 0; i < inputs.length; i++) {
+          for (let i = 0; i < inputs.length; i++) {
             if(inputs[i].id != 'total'){
             if((inputs[i].id).includes(len.toString()) && !((inputs[i].id).includes("number")) ){
               inputs[i].value = ""
@@ -312,8 +312,8 @@
           console.log(inputs)
 
           selects = document.getElementsByTagName("select");
-          var flag1=flag2=1;
-          for (var i = 0; i < selects.length; i++) {
+          let flag1=flag2=1;
+          for (let i = 0; i < selects.length; i++) {
             selects[i].id = (selects[i].id).replace(/\d+/g, '')
             selects[i].name= (selects[i].name).replace(/\d+/g, '')
             selects[i].id = selects[i].id + (flag1).toString()
@@ -326,8 +326,8 @@
           }
           console.log(selects)
           buttons = document.getElementsByTagName("button");
-          var flag1=1;
-          for(var i = 0; i < buttons.length; i++) {
+          let flag1=1;
+          for(let i = 0; i < buttons.length; i++) {
             if((buttons[i].id).includes("fetchitem")){
             buttons[i].id = (buttons[i].id).replace(/\d+/g, '')
             buttons[i].name= (buttons[i].name).replace(/\d+/g, '')
@@ -343,9 +343,9 @@
     <script>
       function fetchitem() {
       console.log('fetch button called')
-      var buttons = document.getElementsByTagName("button");
+      let buttons = document.getElementsByTagName("button");
       button_num = ""
-      for(var i = 0; i < buttons.length; i++) {
+      for(let i = 0; i < buttons.length; i++) {
         if((buttons[i].id).includes("fetchitem")){
             button_id = buttons[i].id
             console.log(buttons[i])
@@ -355,9 +355,9 @@
         }
       }
       console.log(buttons)
-      var inputs = document.getElementsByTagName("input");
-      var pass_item = ""
-      for (var i = 0; i < inputs.length; i++) {
+      let inputs = document.getElementsByTagName("input");
+      let pass_item = ""
+      for (let i = 0; i < inputs.length; i++) {
             input_id = inputs[i].id
             if((inputs[i].id).includes("itemid") && ((input_id.charAt(input_id.length-1)) == button_num)){
               pass_item = inputs[i]
@@ -376,7 +376,7 @@
             if(data.status == 200) {
                 
                 x = data.rows
-                var inputs = document.getElementsByTagName("input");
+                let inputs = document.getElementsByTagName("input");
                 itemname_id = "itemname" + button_num
                 amount_id = "amount" + button_num
                 ExpirationDate_id = "ExpirationDate" + button_num
@@ -384,7 +384,7 @@
                 brand_id = "brand" + button_num
                 size_id = "Quantity" + button_num
                
-                for (var i = 0; i < inputs.length; i++) {
+                for (let i = 0; i < inputs.length; i++) {
                   if(inputs[i].id == itemname_id){
                     
                   inputs[i].value = x[0].ItemName
@@ -399,8 +399,8 @@
                   // console.log(x.expirationDate)
                   }
                 }
-                var total_amount = 0
-                for (var i = 0; i < inputs.length; i++) {
+                let total_amount = 0
+                for (let i = 0; i < inputs.length; i++) {
                  
                   if((inputs[i].id).includes("amount")){
                     total_amount = total_amount + parseInt(inputs[i].value)
@@ -409,7 +409,7 @@
 
                 }
                 // console.log(total_amount)
-                for (var i = 0; i < inputs.length; i++) {
+                for (let i = 0; i < inputs.length; i++) {
                   if(inputs[i].id == 'total')
                   inputs[i].value = total_amount
                 }
@@ -417,8 +417,8 @@
                 // console.log(inputs)
                 // alert("successfully fetched!")
 
-              var selects = document.getElementsByTagName("select");
-              for (var i = 0; i < selects.length; i++) {
+              let selects = document.getElementsByTagName("select");
+              for (let i = 0; i < selects.length; i++) {
                   if(selects[i].id == category_id){
                     
                   selects[i].value = x[0].Category
@@ -454,10 +454,10 @@
 
   <script>
     function downloadInvoice() {
-  var data = getSampleData();
+  let data = getSampleData();
   easyinvoice.createInvoice(data, function(result) {
-    var date_format = new Date();
-    var bill_name = "SHW"+ date_format.getDate() + date_format.getMonth() + date_format.getFullYear() + date_format.getHours() + date_format.getMinutes() + date_format.getSeconds()
+    let date_format = new Date();
+    let bill_name = "SHW"+ date_format.getDate() + date_format.getMonth() + date_format.getFullYear() + date_format.getHours() + date_format.getMinutes() + date_format.getSeconds()
     easyinvoice.download(`${bill_name}.pdf`, result.pdf);
     //	you can download like this as well:
     //	easyinvoice.download();
@@ -465,19 +465,19 @@
   });
 }
     function getSampleData() {
-  var date_format = new Date();
-  var transaction_time = date_format.getHours() + ':' + date_format.getMinutes() + ':' + date_format.getSeconds();
-  var transaction_date = date_format.getDate() + '/' + (parseInt(date_format.getMonth() + 1)).toString() + '/' + date_format.getFullYear();
-  var transaction_id = "SHW" + date_format.getDate() + date_format.getMonth() + date_format.getFullYear().toString().substr(-2) + date_format.getHours() + date_format.getMinutes() + date_format.getSeconds();
-  var item_names = document.getElementsByTagName('input')
-  var items_arr = []
-  for(var i=0; i<item_names.length; i++){
+  let date_format = new Date();
+  let transaction_time = date_format.getHours() + ':' + date_format.getMinutes() + ':' + date_format.getSeconds();
+  let transaction_date = date_format.getDate() + '/' + (parseInt(date_format.getMonth() + 1)).toString() + '/' + date_format.getFullYear();
+  let transaction_id = "SHW" + date_format.getDate() + date_format.getMonth() + date_format.getFullYear().toString().substr(-2) + date_format.getHours() + date_format.getMinutes() + date_format.getSeconds();
+  let item_names = document.getElementsById('input')
+  let items_arr = []
+  for(let i=0; i<item_names.length; i++){
     if((item_names[i].id).includes('itemname')){
-      var item_num = (item_names[i].id).charAt((item_names[i].id).length-1)
+      let item_num = (item_names[i].id).charAt((item_names[i].id).length-1)
       
-      for(var j=0;j<item_names.length;j++){
+      for(let j=0;j<item_names.length;j++){
         if((item_names[j].id).includes('amount')){
-        var amount_num = (item_names[j].id).charAt((item_names[j].id).length-1)
+        let amount_num = (item_names[j].id).charAt((item_names[j].id).length-1)
         if(item_num == amount_num){
           let item_obj = {
             "quantity": "1",
@@ -504,21 +504,38 @@
     "marginBottom": 25,
     "logo": "https://i.pinimg.com/564x/47/7c/4c/477c4c269034cc0bc048409346ac83e9.jpg", //or base64
     //"logoExtension": "png", //only when logo is base64
+    "images": {
+        // The logo on top of your invoice
+        "logo": "https://www.pikpng.com/pngl/m/7-72378_alcohol-infusions-alcohol-logo-png-clipart.png",
+        // The invoice background
+        
+    },
+    
     "sender": {
-      "company": "<shop-name>",
-      "address": "<shop-address>",
-      "zip": "<shop-zip>",
-      "city": "<shop-city>",
-      "country": "Mob. - <shop-owner-mobile-number>",
+      "company": "INFUSIONS",
+       "address": "Soshanguve Block L",
+       "zip": "0152",
+       "city": "Pretoria",
+          "country": "South Africa"
        
-      "custom1": "GST No. - <shop-gst-no.>"
+     // "custom1": "GST No. - <shop-gst-no.>"
       //"custom2": "custom value 2",
       //"custom3": "custom value 3"
     },
+    "information": {
+        // Invoice number
+        "number":  transaction_id,
+        // Invoice data
+        "date":  transaction_date,
+        // Invoice due date
+        //"due-date": "31-12-2021"
+       "time":transaction_time
+    },
 
-    "invoiceNumber": transaction_id,
-    "invoiceDate": transaction_date,
-    "invoiceTime": transaction_time,
+    //"invoiceNumber": transaction_id,
+    //"invoiceDate": transaction_date,
+    //"invoiceTime": transaction_time,
+
     "products": items_arr,
     "bottomNotice": "Thank You for shopping from <shop-name>. We are looking forward to your next visit !"
   };
@@ -527,3 +544,9 @@
   </script>
   </body>
 </html>
+
+
+
+
+
+

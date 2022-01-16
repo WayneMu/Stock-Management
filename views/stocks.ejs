@@ -164,13 +164,14 @@
             <label for="floatingInput">Item ID</label>
             </div>
         </td>
+
           <td class="table-primary">
             <div class="form-floating">
               <input type="text" class="form-control" id="itemname1" name="itemname1" required>
-              <label for="floatingInput">Item Name</label>
-              
+              <label for="floatingInput">Item Name</label>  
           </div>
           </td>
+
           <td class="table-warning">
             <div class="form-floating">
               <select class="form-select" aria-label="Default select example" name="category1" id="category1" required> 
@@ -190,16 +191,7 @@
                 <% brand.forEach(function(order){ %>
                   <option value="<%= order.Brand %>"><%= order.Brand %></option>
                   <% }); %>
-                <!-- <option value="Turtle">Turtle</option>
-                <option value="Duke">Duke</option>
-                <option value="US Polo">US Polo</option>
-                <option value="Flying Machine">Flying Machine</option>
-                <option value="Donear">Donear</option>
-                <option value="Adven">Adven</option>
-                <option value="Siffar">Siffar</option>
-                <option value="Law Man">Law Man</option>
-                <option value="John Player">John Player</option> -->
-              </select>
+                </select>
                 <label for="floatingInput">Brand</label>
             </div>
           </td>

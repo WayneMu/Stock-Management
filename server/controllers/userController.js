@@ -55,7 +55,8 @@ initializePassport(
 
 passport,
 email => users.find(user => user.email === email),
-id => users.find(user => user.id === id)
+id => users.find(user => user.id === id),
+role => users.find(user => user.role === role)
 )
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // View Users
@@ -103,7 +104,8 @@ try {
     id: Date.now().toString(),
     email: req.body.email,
     password: req.body.password,
-    name: req.body.name
+    role: req.body.role
+    
   })
   console.log(users)
  // res.redirect('/login')

@@ -159,9 +159,10 @@ users.push({
   id: Date.now().toString(),
   name: 'Admin',
   email:  req.body.email,
-  password:  req.body.email
+  password:  req.body.password,
+  role:  req.body.role
 })
-  res.render('login.ejs')
+  res.render('login')
 })
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
@@ -181,7 +182,8 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
       id: Date.now().toString(),
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassword
+      password: hashedPassword,
+      role: req.body.role,
     })
     console.log(users)
     res.redirect('/login')
@@ -208,6 +210,18 @@ function checkNotAuthenticated(req, res, next) {
     return res.redirect('/')
   }
   next()
+}
+
+function authRole(role) {
+  
+  return (req, res, next) => {
+    if (req.session.role !== role) {
+      res.status(401)
+      return res.send('Not allowed')
+    }
+
+    next()
+  }
 }
 const routes = require('./server/routes/user');
 app.use('/', routes);
@@ -252,9 +266,9 @@ app.get('/orders', checkAuthenticated,(req,res) =>{
 })
 
 //View Stocks
-app.get('/viewstocks', checkAuthenticated,(req,res) =>{
+app.get('/viewstocks', checkAuthenticated,/*authRole('admin')*/(req,res) =>{
   let sql = 'SELECT * FROM stockdb ORDER BY TYear DESC,Tmonth DESC, TDay DESC,StockTime DESC';
-
+  
   let query = mysqlConnection.query(sql, (err, rows, fields)=>{
     if(!err){
       let sql1 = 'SELECT * FROM branddb' 
@@ -995,41 +1009,33 @@ app.post('/deletestock', checkAuthenticated,(req,res) => {
 
 //edit Stocks
 app.get('/edit-stocks', checkAuthenticated,(req, res) => {
-  let sql1 = 'SELECT * FROM categorydb'
-  
-  let query1 = mysqlConnection.query(sql1, (err1, rows1, fields1)=>{
-    if(!err1)
-    {
-      var category = rows1
-      let sql2 = 'SELECT * FROM branddb'
-      let query2 = mysqlConnection.query(sql2, (err2, rows2, fields2)=>{
-        if(!err2)
-        {
-          var brand = rows2
-          let sql3 = 'SELECT * FROM sizedb'
-          let query3 = mysqlConnection.query(sql3, (err3, rows3, fields3)=>{
-            if(!err3)
-            {
-              var size = rows3
-              console.log(typeof(category))
-              console.log(category)
-              console.log(brand)
-              console.log(size)
-              res.render('edit-stocks.ejs',{category:category, brand:brand, size:size})
-            }
-            else
-            console.log(err3)
-          })
-        }
-        else
-        console.log(err2)
-      })
-    }
-    else
-    console.log(err1)
 
-  
-})
+  let sql = 'SELECT * FROM stockdb ORDER BY TYear DESC,Tmonth DESC, TDay DESC,StockTime DESC';
+
+  let query = mysqlConnection.query(sql, (err, rows, fields)=>{
+    if(!err){
+      let sql1 = 'SELECT * FROM branddb' 
+      let query1 = mysqlConnection.query(sql1, (err1, rows1, fields1)=>{
+        if(!err1){
+          let sql2 = 'SELECT * FROM categorydb'
+          let query2 = mysqlConnection.query(sql2, (err2, rows2, fields2)=>{
+            if(!err2){
+              res.render('edit-stocks.ejs',{
+                display_content:rows, filter_type:'None', filter_name:'None'
+                  });
+              }
+            else
+            console.log(err2)
+          })
+    
+      }
+      else
+      console.log(err1)
+    })
+  }
+    else
+    console.log(err);
+  });
   // res.render('stocks.ejs')
 })
 
